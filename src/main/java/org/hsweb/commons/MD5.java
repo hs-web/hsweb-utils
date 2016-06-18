@@ -14,12 +14,12 @@ public final class MD5 {
     public static String encode(String string) {
         String encode = defaultEncode(string);
         StringBuilder sb = new StringBuilder();
-        sb.append("hsweb");
+        sb.append("zh.sqy");
         for (int i = 0, length = encode.length() / 2; i < length; i++) {
             sb.append(encode.charAt(i * 2 + 1));
             sb.append(encode.charAt(i * 2));
         }
-        sb.append(".me");
+        sb.append("@.com");
         return defaultEncode(sb.toString());
     }
 
