@@ -289,8 +289,8 @@ public class StringUtils {
      * @return 转换后的值
      */
     public static int toInt(Object object, int defaultValue) {
-        if (object instanceof Integer)
-            return (Integer) object;
+        if (object instanceof Number)
+            return ((Number) object).intValue();
         if (isInt(object)) {
             return Integer.parseInt(object.toString());
         }
@@ -318,8 +318,8 @@ public class StringUtils {
      * @return 转换后的值
      */
     public static long toLong(Object object, long defaultValue) {
-        if (object instanceof Long)
-            return (Long) object;
+        if (object instanceof Number)
+            return ((Number) object).longValue();
         if (isInt(object)) {
             return Long.parseLong(object.toString());
         }
@@ -347,8 +347,8 @@ public class StringUtils {
      * @return 转换后的值
      */
     public static double toDouble(Object object, double defaultValue) {
-        if (object instanceof Double)
-            return (Double) object;
+        if (object instanceof Number)
+            return ((Number) object).doubleValue();
         if (isNumber(object)) {
             return Double.parseDouble(object.toString());
         }
