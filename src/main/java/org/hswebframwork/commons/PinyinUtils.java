@@ -1,4 +1,4 @@
-package org.hsweb.commons;
+package org.hswebframwork.commons;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -7,9 +7,6 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-/**
- * Created by zhouhao on 16-6-18.
- */
 public class PinyinUtils {
     /**
      * 获取汉字全拼

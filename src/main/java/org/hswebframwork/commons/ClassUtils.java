@@ -1,4 +1,4 @@
-package org.hsweb.commons;
+package org.hswebframwork.commons;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

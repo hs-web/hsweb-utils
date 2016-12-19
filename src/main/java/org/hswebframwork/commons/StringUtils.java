@@ -1,4 +1,4 @@
-package org.hsweb.commons;
+package org.hswebframwork.commons;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
