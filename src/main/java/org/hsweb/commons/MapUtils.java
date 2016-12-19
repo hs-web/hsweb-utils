@@ -2,6 +2,7 @@ package org.hsweb.commons;
 
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class MapUtils {
 
@@ -27,6 +28,22 @@ public class MapUtils {
             data_.put(k, data.get(k));
         }
         return data_;
+    }
+
+    public static <K, V> Map<K, V> merge(Map<K, V> map, Map<K, V> maps) {
+        return merge(new HashMap<>(), map, maps);
+    }
+
+    public static <K, V> Map<K, V> merge(Map<K, V> target, Map<K, V> map, Map<K, V>... maps) {
+        target.putAll(map);
+        for (int i = 0; i < maps.length; i++) {
+            target.putAll(maps[0]);
+        }
+        return target;
+    }
+
+    public static <K, V> Map<K, V> merge(Supplier<Map<K, V>> supplier, Map<K, V> map, Map<K, V>... maps) {
+        return merge(supplier.get(), map, maps);
     }
 
 
