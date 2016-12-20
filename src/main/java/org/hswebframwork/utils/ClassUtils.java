@@ -1,4 +1,4 @@
-package org.hswebframwork.commons;
+package org.hswebframwork.utils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -73,7 +73,7 @@ public class ClassUtils {
         }
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         if (index >= params.length || index < 0) {
-            throw new RuntimeException("Index outof bounds");
+            throw new RuntimeException("Index out of bounds");
         }
         if (!(params[index] instanceof Class)) {
             return Object.class;

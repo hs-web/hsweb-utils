@@ -1,4 +1,4 @@
-package org.hswebframwork.commons;
+package org.hswebframwork.utils;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;

@@ -1,10 +1,10 @@
-package org.hswebframwork.commons.file;
+package org.hswebframwork.utils.file;
 
 
-import org.hswebframwork.commons.StringUtils;
-import org.hswebframwork.commons.file.callback.ReadCallBack;
-import org.hswebframwork.commons.file.callback.ReadStringCallBack;
-import org.hswebframwork.commons.file.callback.ScanCallBack;
+import org.hswebframwork.utils.StringUtils;
+import org.hswebframwork.utils.file.callback.ReadCallBack;
+import org.hswebframwork.utils.file.callback.ReadStringCallBack;
+import org.hswebframwork.utils.file.callback.ScanCallBack;
 
 import java.io.*;
 

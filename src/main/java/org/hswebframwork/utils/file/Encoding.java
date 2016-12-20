@@ -1,4 +1,4 @@
-package org.hswebframwork.commons.file;
+package org.hswebframwork.utils.file;
 
 class Encoding {
 	// Supported Encoding Types
