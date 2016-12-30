@@ -464,7 +464,8 @@ public final class DateTimeUtils {
             dateStr = ymd.length > 2 ? ymd[2] : "";
             monthStr = monthStr == "" ? Integer.toString(1) : monthStr;
             dateStr = dateStr == "" ? Integer.toString(1) : dateStr;
-            String dtr = (yearStr + "-" + monthStr + "-" + dateStr + " " + hms);
+
+            String dtr = (yearStr + "-" + formatDateSplit(monthStr) + "-" + formatDateSplit(dateStr) + " " + hms);
             if (!dtr.matches(REG_EXP_DATE))
                 return null;
             // 返回日期
@@ -474,6 +475,14 @@ public final class DateTimeUtils {
         }
     }
 
+    private static String formatDateSplit(String md) {
+        if (StringUtils.isInt(md)) {
+            if (StringUtils.toInt(md) < 10) return "0".concat(String.valueOf(StringUtils.toInt(md)));
+        }
+        return md;
+    }
+
+
     /**
      * 解析多个时间，指定时间之间的分隔符和时间的格式符 分隔符不能与格式符相同
      *
@@ -482,7 +491,7 @@ public final class DateTimeUtils {
      * @param splitChar  指定分隔符
      * @return 格式正确返回分割后的时间对象数组 格式错误返回null <br>
      * 指定了格式符为. 分隔符为- 返回值为 时间长度为2的Date类型数组<br>
-     * 时间转换的方式详见 {@link org.webbuilder.utils.common.DateTimeUtils#formatUnknownString2Date(String dateString)}
+     * 时间转换的方式详见 {@link DateTimeUtils#formatUnknownString2Date(String dateString)}
      */
     public static Date[] formatDatesByString(String dateString, String spaceChar, String splitChar) {
         if (spaceChar.equals(splitChar)) {
