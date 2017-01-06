@@ -75,10 +75,14 @@ public class ClassUtils {
         if (index >= params.length || index < 0) {
             throw new RuntimeException("Index outof bounds");
         }
-        if (!(params[index] instanceof Class)) {
-            return Object.class;
+        Object res = params[index];
+        if (res instanceof Class) {
+            return ((Class) res);
         }
-        return (Class) params[index];
+        if (res instanceof ParameterizedType) {
+            return (Class<?>) ((ParameterizedType) res).getRawType();
+        }
+        return null;
     }
 
     /**
