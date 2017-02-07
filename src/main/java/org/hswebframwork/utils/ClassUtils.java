@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -69,6 +70,9 @@ public class ClassUtils {
     public static Class<?> getGenericType(Class clazz, int index) {
         Type genType = clazz.getGenericSuperclass();
         if (!(genType instanceof ParameterizedType)) {
+            if (clazz != Object.class) {
+                return getGenericType(clazz.getSuperclass());
+            }
             return Object.class;
         }
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
@@ -83,6 +87,17 @@ public class ClassUtils {
             return (Class<?>) ((ParameterizedType) res).getRawType();
         }
         return null;
+    }
+
+    public static class Test extends ArrayList<String> {
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getGenericType(Test.class));
+
+        System.out.println(getGenericType(new Test() {
+        }.getClass()));
     }
 
     /**
