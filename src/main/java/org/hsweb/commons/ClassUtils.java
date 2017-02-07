@@ -69,6 +69,9 @@ public class ClassUtils {
     public static Class<?> getGenericType(Class clazz, int index) {
         Type genType = clazz.getGenericSuperclass();
         if (!(genType instanceof ParameterizedType)) {
+            if (clazz != Object.class) {
+                return getGenericType(clazz.getSuperclass());
+            }
             return Object.class;
         }
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
