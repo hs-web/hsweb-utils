@@ -4,10 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ClassUtils {
 
@@ -60,24 +57,10 @@ public class ClassUtils {
         return ann;
     }
 
-    /**
-     * 获取一个类的泛型类型,如果未获取到返回Object.class
-     *
-     * @param clazz 要获取的类
-     * @param index 泛型索引
-     * @return 泛型
-     */
-    public static Class<?> getGenericType(Class clazz, int index) {
-        Type genType = clazz.getGenericSuperclass();
-        if (!(genType instanceof ParameterizedType)) {
-            if (clazz != Object.class) {
-                return getGenericType(clazz.getSuperclass());
-            }
-            return Object.class;
-        }
-        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+    public static Class<?> getGenericTypeByType(ParameterizedType genType, int index) {
+        Type[] params = genType.getActualTypeArguments();
         if (index >= params.length || index < 0) {
-            throw new RuntimeException("Index out of bounds");
+            return null;
         }
         Object res = params[index];
         if (res instanceof Class) {
@@ -89,15 +72,25 @@ public class ClassUtils {
         return null;
     }
 
-    public static class Test extends ArrayList<String> {
-
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getGenericType(Test.class));
-
-        System.out.println(getGenericType(new Test() {
-        }.getClass()));
+    /**
+     * 获取一个类的泛型类型,如果未获取到返回Object.class
+     *
+     * @param clazz 要获取的类
+     * @param index 泛型索引
+     * @return 泛型
+     */
+    public static Class<?> getGenericType(Class clazz, int index) {
+        List<Type> arrys = new ArrayList<>(Arrays.asList(clazz.getGenericInterfaces()));
+        arrys.add(clazz.getGenericSuperclass());
+        return arrys.stream()
+                .map(type -> {
+                    if (clazz != Object.class && !(type instanceof ParameterizedType)) {
+                        return getGenericType(clazz.getSuperclass(), index);
+                    }
+                    return getGenericTypeByType(((ParameterizedType) type), index);
+                })
+                .filter(Objects::nonNull)
+                .findAny().orElse((Class) Object.class);
     }
 
     /**
