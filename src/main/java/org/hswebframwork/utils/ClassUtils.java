@@ -80,9 +80,11 @@ public class ClassUtils {
      * @return 泛型
      */
     public static Class<?> getGenericType(Class clazz, int index) {
-        List<Type> arrys = new ArrayList<>(Arrays.asList(clazz.getGenericInterfaces()));
+        List<Type> arrys = new ArrayList<>();
         arrys.add(clazz.getGenericSuperclass());
+        arrys.addAll(Arrays.asList(clazz.getGenericInterfaces()));
         return arrys.stream()
+                .filter(Objects::nonNull)
                 .map(type -> {
                     if (clazz != Object.class && !(type instanceof ParameterizedType)) {
                         return getGenericType(clazz.getSuperclass(), index);
@@ -90,7 +92,9 @@ public class ClassUtils {
                     return getGenericTypeByType(((ParameterizedType) type), index);
                 })
                 .filter(Objects::nonNull)
-                .findAny().orElse((Class) Object.class);
+                .filter(res -> res != Object.class)
+                .findFirst()
+                .orElse((Class) Object.class);
     }
 
     /**
