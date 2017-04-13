@@ -176,6 +176,8 @@ public class StringUtils {
         return strBuf.toString();
     }
 
+    static final char CN_CHAR_START = '\u4e00';
+    static final char CN_CHAR_END   = '\u9fa5';
 
     /**
      * 是否包含中文字符
@@ -184,8 +186,11 @@ public class StringUtils {
      * @return 是否包含中文字符
      */
     public static boolean containsChineseChar(String str) {
-        Matcher m = compileRegex("[\u4e00-\u9fa5]+").matcher(str);
-        return m.matches();
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= CN_CHAR_START && chars[i] <= CN_CHAR_END) return true;
+        }
+        return false;
     }
 
     /**
@@ -352,7 +357,7 @@ public class StringUtils {
         if (isNumber(object)) {
             return Double.parseDouble(object.toString());
         }
-        if(null==object)return defaultValue;
+        if (null == object) return defaultValue;
         return 0;
     }
 
@@ -430,7 +435,7 @@ public class StringUtils {
         String after = m.replaceAll("");
         String temp = after.replaceAll("\\p{P}", "");
         char[] ch = temp.trim().toCharArray();
-        float chLength = 0 ;
+        float chLength = 0;
         float count = 0;
         for (int i = 0; i < ch.length; i++) {
             char c = ch[i];
@@ -441,7 +446,7 @@ public class StringUtils {
                 chLength++;
             }
         }
-        float result = count / chLength ;
+        float result = count / chLength;
         if (result > 0.4) {
             return true;
         } else {
