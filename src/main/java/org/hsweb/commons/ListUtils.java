@@ -38,7 +38,7 @@ public class ListUtils {
     public static <T> List<T> merge(List<T> target, List<T> list, List<T>... lists) {
         target.addAll(list);
         for (int i = 0; i < lists.length; i++) {
-            target.addAll(lists[0]);
+            target.addAll(lists[i]);
         }
         return target;
     }
