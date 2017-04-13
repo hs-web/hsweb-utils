@@ -37,7 +37,7 @@ public class MapUtils {
     public static <K, V> Map<K, V> merge(Map<K, V> target, Map<K, V> map, Map<K, V>... maps) {
         target.putAll(map);
         for (int i = 0; i < maps.length; i++) {
-            target.putAll(maps[0]);
+            target.putAll(maps[i]);
         }
         return target;
     }
