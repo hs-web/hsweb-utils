@@ -29,4 +29,9 @@ public class SampleJDKDateFormatter implements DateFormatter {
             return null;
         }
     }
+
+    @Override
+    public String getPattern() {
+        return formatSupplier.get().toPattern();
+    }
 }
