@@ -411,10 +411,12 @@ public final class DateTimeUtils {
     /**
      * 自动解析多种格式的时间字符串为时间对象<br>
      * 支持格式为：yyyy-MM-dd HH:mm:ss 支持多种分隔符，以及多种日期精度。 如yyyy年MM月。 HH时mm分ss秒
+     * 已有更好的替代方案: {@link org.hsweb.commons.time.DateFormatter#fromString(String)}
      *
      * @param dateString 时间字符串 <br>
      * @return 格式正确则返回对应的java.util.Date对象 格式错误返回null
      */
+    @Deprecated
     public static Date formatUnknownString2Date(String dateString) {
         try {
             if (StringUtils.isNullOrEmpty(dateString)) {
