@@ -4,10 +4,7 @@ import org.joda.time.DateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -17,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public interface DateFormatter {
 
-    List<DateFormatter> supportFormatter = Arrays.asList(
+    List<DateFormatter> supportFormatter = new ArrayList<>(Arrays.asList(
             /*
             *常见格式
             * */
@@ -29,8 +26,26 @@ public interface DateFormatter {
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]{2}/[0-9]{2}"), "yyyy/MM/dd")
             //yyyy年MM月dd日
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}年[0-9]{2}月[0-9]{2}日"), "yyyy年MM月dd日")
+
+            // yyyy-M-d
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]-[0-9]"), "yyyy-M-d")
+            // yyyy-MM-d
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]"), "yyyy-MM-d")
+            // yyyy-M-dd
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]-[0-9]{2}"), "yyyy-M-dd")
+
+            // yyyy/M/d
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]/[0-9]"), "yyyy/M/d")
+            // yyyy/MM/d
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]{2}/[0-9]"), "yyyy/MM/d")
+            // yyyy/M/dd
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]/[0-9]{2}"), "yyyy/M/dd")
+
             // yyyy-MM-dd HH:mm:ss
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy-MM-dd HH:mm:ss")
+
+            // yyyy/MM/dd HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy/MM/dd HH:mm:ss")
             // yyyy-MM-dd HH:mm:ssZ
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\+[0-9]{4}"), "yyyy-MM-dd HH:mm:ssZ")
             //yyyy-MM-dd'T'HH:mm:ss
@@ -41,7 +56,8 @@ public interface DateFormatter {
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}年[0-9]{2}月[0-9]{2}日[0-9]{2}时[0-9]{2}分[0-9]{2}秒"), "yyyy年MM月dd日HH时mm分ss秒")
             //yyyy年MM月dd日 HH时mm分ss秒
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}年[0-9]{2}月[0-9]{2}日 [0-9]{2}时[0-9]{2}分[0-9]{2}秒"), "yyyy年MM月dd日 HH时mm分ss秒")
-
+            // HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{2}:[0-9]{2}:[0-9]{2}"), "HH:mm:ss")
             /*
             * 奇奇怪怪的格式
             * */
@@ -61,7 +77,7 @@ public interface DateFormatter {
             , new SampleJDKDateFormatter(str -> str.contains("GMT") && str.split("[ ]").length == 6, () -> new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT' yyyy", Locale.US))
             //MMM d, yyyy K:m:s a
             , new SampleJDKDateFormatter(str -> str.endsWith("AM") || str.endsWith("PM") && str.split("[ ]").length == 5, () -> new SimpleDateFormat("MMM d, yyyy K:m:s a", Locale.ENGLISH))
-    );
+    ));
 
     boolean support(String str);
 
