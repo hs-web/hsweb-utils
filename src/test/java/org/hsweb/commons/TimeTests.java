@@ -1,9 +1,15 @@
 package org.hsweb.commons;
 
 import org.hsweb.commons.time.DateFormatter;
+import org.junit.Assert;
 import org.junit.Test;
 
+import javax.xml.crypto.Data;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * TODO 完成注释
@@ -31,7 +37,12 @@ public class TimeTests {
                 "2015-11-01T13:12:01",
                 "2015-11-01T13:12:01+0100",
                 "Sep 29, 2012 1:00:01 AM",
-                "Sep 29, 2012 1:00:01 PM"
+                "Sep 29, 2012 1:00:01 PM",
+                "07:13:12",
+                "2017-4-5",
+                "2017/4/5",
+                "2017/10/5",
+                "2017/4/12"
         };
         for (String test : tests) {
             DateFormatter formatter = DateFormatter.getFormatter(test);
@@ -40,5 +51,30 @@ public class TimeTests {
             System.out.println(formatter.getPattern() + "=>:\t\t" + test + " = " + DateFormatter.toString(date, formatter.getPattern()));
         }
 
+
+        BiFunction<String, String, Predicate<String>> compareBuilder = (str1, str2) -> {
+            long from = DateFormatter.fromString(str1).getTime();
+            long to = DateFormatter.fromString(str2).getTime();
+            return (compare) -> {
+                long target = DateFormatter.fromString(compare).getTime();
+                return from >= to ? target >= from || target <= to : target >= from && target <= to;
+            };
+        };
+
+        boolean timeInScope = compareBuilder.apply("20:12:00", "06:00:00")
+                .and(compareBuilder.apply("18:00:00", "22:00:00"))
+                .and(compareBuilder.apply("02:00:00", "22:00:00"))
+                .test("21:59:00");
+
+        boolean timeNotInScope = !compareBuilder.apply("08:12:02", "21:12:21")
+                .test("21:59:00");
+
+        boolean dateInScope = compareBuilder.apply("2012/12/12 11:11:11", "2012/12/15 23:11:11")
+                .test("2012/12/13 00:00:00");
+
+        boolean dateNotInScope = !compareBuilder.apply("2012/12/12 11:11:11", "2012/12/15 23:11:11")
+                .test("2012/12/12 10:00:00");
+
+        Assert.assertTrue(timeInScope && timeNotInScope && dateInScope && dateNotInScope);
     }
 }
