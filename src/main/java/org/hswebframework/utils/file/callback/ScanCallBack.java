@@ -1,4 +1,4 @@
-package org.hswebframwork.utils.file.callback;
+package org.hswebframework.utils.file.callback;
 
 import java.io.File;
 

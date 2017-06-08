@@ -1,4 +1,4 @@
-package org.hswebframwork.utils.file;
+package org.hswebframework.utils.file;
 
 import java.io.InputStream;
 import java.net.URL;

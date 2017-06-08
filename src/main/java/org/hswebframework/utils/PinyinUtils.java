@@ -1,4 +1,4 @@
-package org.hswebframwork.utils;
+package org.hswebframework.utils;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;

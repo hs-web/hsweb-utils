@@ -1,4 +1,4 @@
-package org.hswebframwork.utils.file.callback;
+package org.hswebframework.utils.file.callback;
 
 /**
  * Created by 浩 on 2015-12-09 0009.
