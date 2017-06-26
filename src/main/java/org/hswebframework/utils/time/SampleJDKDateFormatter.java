@@ -1,5 +1,7 @@
 package org.hswebframework.utils.time;
 
+import org.joda.time.DateTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,5 +35,10 @@ public class SampleJDKDateFormatter implements DateFormatter {
     @Override
     public String getPattern() {
         return formatSupplier.get().toPattern();
+    }
+
+    @Override
+    public String toString(Date date) {
+        return new DateTime(date).toString(getPattern());
     }
 }
