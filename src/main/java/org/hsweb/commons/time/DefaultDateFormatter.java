@@ -1,5 +1,6 @@
 package org.hsweb.commons.time;
 
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -37,5 +38,10 @@ public class DefaultDateFormatter implements DateFormatter {
     @Override
     public String getPattern() {
         return formatterString;
+    }
+
+    @Override
+    public String toString(Date date) {
+        return new DateTime(date).toString(getPattern());
     }
 }

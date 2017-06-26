@@ -83,6 +83,8 @@ public interface DateFormatter {
 
     Date format(String str);
 
+    String toString(Date date);
+
     String getPattern();
 
     static Date fromString(String dateString) {
@@ -103,6 +105,10 @@ public interface DateFormatter {
 
     static String toString(Date date, String format) {
         if (null == date) return null;
+        for (DateFormatter formatter : supportFormatter) {
+            if (formatter.getPattern().equals(format))
+                return formatter.toString(date);
+        }
         return new DateTime(date).toString(format);
     }
 
