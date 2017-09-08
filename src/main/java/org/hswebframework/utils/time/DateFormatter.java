@@ -47,21 +47,36 @@ public interface DateFormatter {
             // yyyy/M/dd
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]/[0-9]{2}"), "yyyy/M/dd")
 
+            // yyyy-MM-dd HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy-MM-dd HH:mm:ss")
             // yyyy-M-d HH:mm:ss
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]-[0-9] [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy-M-d HH:mm:ss")
             // yyyy-M-d H:m:s
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]-[0-9] [0-9]:[0-9]:[0-9]"), "yyyy-M-d H:m:s")
-
-            // yyyy-MM-dd HH:mm:ss
-            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy-MM-dd HH:mm:ss")
-
-            // yyyy/M/d HH:mm:ss
-            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]/[0-9] [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy/M/d HH:mm:ss")
-            // yyyy/M/d H:m:s
-            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]/[0-9] [0-9]:[0-9]:[0-9]"), "yyyy/M/d H:m:s")
+            // yyyy-MM-d HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9] [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy-MM-d HH:mm:ss")
+            // yyyy-M-dd HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy-M-dd HH:mm:ss")
+            // yyyy-M-dd H:m:s
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]-[0-9]{2} [0-9]:[0-9]:[0-9]"), "yyyy-M-dd H:m:s")
+            // yyyy-MM-d H:m:s
+            , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9] [0-9]:[0-9]:[0-9]"), "yyyy-MM-d H:m:s")
 
             // yyyy/MM/dd HH:mm:ss
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"), "yyyy/MM/dd HH:mm:ss")
+            // yyyy/M/d HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0/9]{4}/[0/9]/[0/9] [0/9]{2}:[0/9]{2}:[0/9]{2}"), "yyyy/M/d HH:mm:ss")
+            // yyyy/M/d H:m:s
+            , new DefaultDateFormatter(Pattern.compile("[0/9]{4}/[0/9]/[0/9] [0/9]:[0/9]:[0/9]"), "yyyy/M/d H:m:s")
+            // yyyy/MM/d HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0/9]{4}/[0/9]{2}/[0/9] [0/9]{2}:[0/9]{2}:[0/9]{2}"), "yyyy/MM/d HH:mm:ss")
+            // yyyy/M/dd HH:mm:ss
+            , new DefaultDateFormatter(Pattern.compile("[0/9]{4}/[0/9]/[0/9]{2} [0/9]{2}:[0/9]{2}:[0/9]{2}"), "yyyy/M/dd HH:mm:ss")
+            // yyyy/M/dd H:m:s
+            , new DefaultDateFormatter(Pattern.compile("[0/9]{4}/[0/9]/[0/9]{2} [0/9]:[0/9]:[0/9]"), "yyyy/M/dd H:m:s")
+            // yyyy/MM/d H:m:s
+            , new DefaultDateFormatter(Pattern.compile("[0/9]{4}/[0/9]{2}/[0/9] [0/9]:[0/9]:[0/9]"), "yyyy/MM/d H:m:s")
+
             // yyyy-MM-dd HH:mm:ssZ
             , new DefaultDateFormatter(Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\+[0-9]{4}"), "yyyy-MM-dd HH:mm:ssZ")
             //yyyy-MM-dd'T'HH:mm:ss
