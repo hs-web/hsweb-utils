@@ -1,4 +1,4 @@
-package org.hsweb.commons;
+package org.hswebframework.utils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -57,7 +57,6 @@ public class ClassUtils {
         return ann;
     }
 
-
     public static Class<?> getGenericTypeByType(ParameterizedType genType, int index) {
         Type[] params = genType.getActualTypeArguments();
         if (index >= params.length || index < 0) {
@@ -97,6 +96,7 @@ public class ClassUtils {
                 .findFirst()
                 .orElse((Class) Object.class);
     }
+
     /**
      * 获取一个类的第一个泛型的类型
      *
