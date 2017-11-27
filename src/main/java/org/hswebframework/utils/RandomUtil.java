@@ -1,6 +1,8 @@
 package org.hswebframework.utils;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -13,7 +15,7 @@ public class RandomUtil {
         return random;
     }
 
-    static char[] chars = {
+   private static char[] chars = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g',
             'h', 'i', 'j', 'k', 'l', 'm', 'n',
             'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -32,14 +34,11 @@ public class RandomUtil {
      * @return 生成结果
      */
     public static String randomChar(int len) {
-        StringBuffer shortBuffer = new StringBuffer();
-        String uuid = UUID.randomUUID().toString().replace("-", "");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < len; i++) {
-            String str = uuid.substring(i * 4, i * 4 + 4);
-            int x = Integer.parseInt(str, 16);
-            shortBuffer.append(chars[x % 0x3E]);
+            sb.append(chars[random.nextInt(chars.length)]);
         }
-        return shortBuffer.toString();
+        return sb.toString();
     }
 
     public static String randomChar() {
