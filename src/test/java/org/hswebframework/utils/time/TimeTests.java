@@ -1,6 +1,5 @@
-package org.hsweb.commons;
+package org.hswebframework.utils.time;
 
-import org.hswebframework.utils.time.DateFormatter;
 import org.junit.Assert;
 import org.junit.Test;
 
