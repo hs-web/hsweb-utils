@@ -1,9 +1,7 @@
 package org.hswebframework.utils;
 
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 随机数工具，用于产生随机数，随机密码等
@@ -36,7 +34,7 @@ public class RandomUtil {
     public static String randomChar(int len) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < len; i++) {
-            sb.append(chars[random.nextInt(chars.length)]);
+            sb.append(chars[ThreadLocalRandom.current().nextInt(chars.length)]);
         }
         return sb.toString();
     }

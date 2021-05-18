@@ -21,22 +21,21 @@ public class PinyinUtils {
         t3.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         t3.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         t3.setVCharType(HanyuPinyinVCharType.WITH_V);
-        String t4 = "";
-        int t0 = t1.length;
+        StringBuilder t4 = new StringBuilder();
         try {
-            for (int i = 0; i < t0; i++) {
+            for (char c : t1) {
                 // 判断是否为汉字字符
-                if (StringUtils.containsChineseChar(Character.toString(t1[i]))) {
-                    t2 = PinyinHelper.toHanyuPinyinStringArray(t1[i], t3);
-                    t4 += t2[0];
+                if (StringUtils.containsChineseChar(Character.toString(c))) {
+                    t2 = PinyinHelper.toHanyuPinyinStringArray(c, t3);
+                    t4.append(t2[0]);
                 } else {
-                    t4 += Character.toString(t1[i]);
+                    t4.append(c);
                 }
             }
-            return t4;
-        } catch (BadHanyuPinyinOutputFormatCombination e1) {
+            return t4.toString();
+        } catch (BadHanyuPinyinOutputFormatCombination ignore) {
         }
-        return t4;
+        return t4.toString();
     }
 
     /**
@@ -46,16 +45,16 @@ public class PinyinUtils {
      * @return 字符串首字母
      */
     public static String toPinYinHeadChar(String str) {
-        String convert = "";
+        StringBuilder convert = new StringBuilder();
         for (int j = 0; j < str.length(); j++) {
             char word = str.charAt(j);
             String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
             if (pinyinArray != null) {
-                convert += pinyinArray[0].charAt(0);
+                convert.append(pinyinArray[0].charAt(0));
             } else {
-                convert += word;
+                convert.append(word);
             }
         }
-        return convert;
+        return convert.toString();
     }
 }
