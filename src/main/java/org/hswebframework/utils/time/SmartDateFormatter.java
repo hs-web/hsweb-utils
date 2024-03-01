@@ -7,6 +7,7 @@ import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 class SmartDateFormatter implements DateFormatter {
@@ -58,7 +59,7 @@ class SmartDateFormatter implements DateFormatter {
     DateTimeFormatter pattern;
     final String patternString;
 
-    private final List<Part> parts;
+    private final Part[] parts;
 
     private final int max, min;
 
@@ -67,7 +68,7 @@ class SmartDateFormatter implements DateFormatter {
         return this;
     }
 
-    SmartDateFormatter(String pattern, int max, int min, List<Part> parts) {
+    SmartDateFormatter(String pattern, int max, int min, Part[] parts) {
         this.parts = parts;
         this.max = max;
         this.min = min;
@@ -75,32 +76,32 @@ class SmartDateFormatter implements DateFormatter {
         this.pattern = DateTimeFormatter.ofPattern(patternString);
     }
 
-    SmartDateFormatter(String pattern, List<Part> parts) {
+    SmartDateFormatter(String pattern, Part[] parts) {
         this.parts = parts;
-        this.max = this.parts.stream().mapToInt(Part::length).sum();
+        this.max = Stream.of(this.parts).mapToInt(Part::length).sum();
         this.min = max;
         this.patternString = pattern;
         this.pattern = DateTimeFormatter.ofPattern(patternString);
     }
 
-    SmartDateFormatter(List<Part> parts) {
+    SmartDateFormatter(Part[] parts) {
         this.parts = parts;
-        this.max = this.parts.stream().mapToInt(Part::length).sum();
+        this.max = Stream.of(this.parts).mapToInt(Part::length).sum();
         this.min = max;
-        this.patternString = this.parts.stream().map(Part::pattern).collect(Collectors.joining());
+        this.patternString = Stream.of(this.parts).map(Part::pattern).collect(Collectors.joining());
         this.pattern = DateTimeFormatter.ofPattern(patternString);
     }
 
     public static SmartDateFormatter of(String pattern, Part... parts) {
-        return new SmartDateFormatter(pattern, Arrays.asList(parts));
+        return new SmartDateFormatter(pattern, parts);
     }
 
     public static SmartDateFormatter of(String pattern, int min, int max, Part... parts) {
-        return new SmartDateFormatter(pattern, max, min, Arrays.asList(parts));
+        return new SmartDateFormatter(pattern, max, min, parts);
     }
 
     public static SmartDateFormatter of(Part... parts) {
-        return new SmartDateFormatter(Arrays.asList(parts));
+        return new SmartDateFormatter(parts);
     }
 
     @Override
