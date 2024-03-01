@@ -4,6 +4,7 @@ package org.hswebframework.utils;
 import java.util.*;
 import java.util.function.Supplier;
 
+@Deprecated
 public class MapUtils {
 
     public static boolean isNullOrEmpty(Map map) {

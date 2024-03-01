@@ -7,13 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * 随机数工具，用于产生随机数，随机密码等
  */
 public class RandomUtil {
-    private static final Random random = new Random();
 
     public static Random getRandom() {
-        return random;
+        return ThreadLocalRandom.current();
     }
 
-   private static char[] chars = {
+   private static final char[] chars = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g',
             'h', 'i', 'j', 'k', 'l', 'm', 'n',
             'o', 'p', 'q', 'r', 's', 't', 'u',

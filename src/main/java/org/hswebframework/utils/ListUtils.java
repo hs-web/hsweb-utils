@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+@Deprecated
 public class ListUtils {
     public static boolean isNullOrEmpty(List list) {
         return list == null || list.isEmpty();
