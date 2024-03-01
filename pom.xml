@@ -6,7 +6,7 @@
 
     <groupId>org.hswebframework</groupId>
     <artifactId>hsweb-utils</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.4-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>hsweb utils</description>
@@ -15,7 +15,7 @@
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
@@ -164,7 +164,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <!--时间解析-->
@@ -186,7 +186,7 @@
         <repository>
             <id>hsweb-nexus</id>
             <name>Nexus Release Repository</name>
-            <url>http://nexus.hsweb.me/content/groups/public/</url>
+            <url>https://nexus.hsweb.me/content/groups/public/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
