@@ -3,6 +3,8 @@ package org.hswebframework.utils.time;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.hswebframework.utils.time.SmartDateFormatter.*;
@@ -66,6 +68,9 @@ public interface DateFormatter {
             , of("yyyy-MM-dd'T'HH:mm:ssXXX", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, plus, XXX)
             //yyyy-MM-dd'T'HH:mm:ss.SSS
             , of("yyyy-MM-dd'T'HH:mm:ss.SSS", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS)
+            , of("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS, SSS)
+            , of("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS, SSS, SSS)
+
             //yyyy-MM-dd'T'HH:mm:ss.SSSz
             , of("yyyy-MM-dd'T'HH:mm:ss.SSSZ", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS, plus, Z)
             , of("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS, XXX)
@@ -142,7 +147,11 @@ public interface DateFormatter {
 
     Date format(String str);
 
+    LocalDateTime parse(String str);
+
     String toString(Date date);
+
+    String toString(LocalDateTime dateTime);
 
     String getPattern();
 
@@ -164,6 +173,15 @@ public interface DateFormatter {
                 .forPattern(pattern)
                 .parseDateTime(dateString)
                 .toDate();
+    }
+
+    static String toString(LocalDateTime date, String format) {
+        if (null == date) return null;
+        for (DateFormatter formatter : supportFormatter) {
+            if (formatter.getPattern().equals(format))
+                return formatter.toString(date);
+        }
+        return DateTimeFormatter.ofPattern(format).format(date);
     }
 
     static String toString(Date date, String format) {

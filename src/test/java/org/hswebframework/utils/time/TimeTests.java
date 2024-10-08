@@ -3,6 +3,7 @@ package org.hswebframework.utils.time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -48,6 +49,8 @@ public class TimeTests {
                 "2015-11-01 13:12:01+0100",
                 "2015-11-01T13:12:01",
                 "2015-11-01T13:12:01.777",
+                "2015-11-01T13:12:01.777666",
+                "2015-11-01T13:12:01.777666555",
                 "2015-11-01T13:12:01+0100",
                 "2015-11-01T13:12:01.888+0100",
                 "Sep 29, 2012 1:00:01 AM",
@@ -62,7 +65,7 @@ public class TimeTests {
             DateFormatter formatter = DateFormatter.getFormatter(test);
             Assert.assertNotNull("format not supported :" + test, formatter);
             try {
-                Date date = formatter.format(test);
+                LocalDateTime date = formatter.parse(test);
                 System.out.println(formatter.getPattern() + "=>:\t\t" + test + " = " + DateFormatter.toString(date, formatter.getPattern()));
             } catch (Throwable e) {
                 System.err.println(formatter.getPattern()+"=>"+test);

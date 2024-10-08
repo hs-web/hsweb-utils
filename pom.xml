@@ -6,7 +6,7 @@
 
     <groupId>org.hswebframework</groupId>
     <artifactId>hsweb-utils</artifactId>
-    <version>3.0.4</version>
+    <version>3.0.5-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>hsweb utils</description>

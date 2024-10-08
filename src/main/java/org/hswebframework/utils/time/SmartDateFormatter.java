@@ -122,13 +122,17 @@ class SmartDateFormatter implements DateFormatter {
 
     @Override
     public Date format(String str) {
+        return Date.from(parse(str).atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Override
+    public LocalDateTime parse(String str) {
         TemporalAccessor accessor = pattern.parse(str);
 
         LocalDate date = accessor.query(TemporalQueries.localDate());
         LocalTime time = accessor.query(TemporalQueries.localTime());
         ZoneId zoneId = accessor.query(TemporalQueries.zone());
         ZoneOffset offset = accessor.query(TemporalQueries.offset());
-
         LocalDateTime dateTime;
 
         if (date != null) {
@@ -140,19 +144,16 @@ class SmartDateFormatter implements DateFormatter {
         } else {
             dateTime = LocalDateTime.of(LocalDate.now(), time);
         }
-
         if (offset != null) {
-            return Date.from(dateTime.atOffset(offset).toInstant());
+            return dateTime.atOffset(offset).toLocalDateTime();
         }
         if (zoneId != null) {
-            return Date.from(dateTime
-                                     .atZone(zoneId)
-                                     .withZoneSameInstant(ZoneId.systemDefault())
-                                     .toInstant());
+            return dateTime
+                    .atZone(zoneId)
+                    .withZoneSameInstant(ZoneId.systemDefault())
+                    .toLocalDateTime();
         }
-
-        return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
-
+        return dateTime.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     @Override
@@ -161,6 +162,11 @@ class SmartDateFormatter implements DateFormatter {
         return pattern.format(
                 ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())
         );
+    }
+
+    @Override
+    public String toString(LocalDateTime dateTime) {
+        return pattern.format(dateTime.atZone(ZoneId.systemDefault()));
     }
 
     @Override
