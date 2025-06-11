@@ -66,6 +66,8 @@ public interface DateFormatter {
             //yyyy-MM-dd'T'HH:mm:ssZ
             , of("yyyy-MM-dd'T'HH:mm:ssZ", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, plus, Z)
             , of("yyyy-MM-dd'T'HH:mm:ssXXX", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, plus, XXX)
+            , of("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS, str("Z"))
+
             //yyyy-MM-dd'T'HH:mm:ss.SSS
             , of("yyyy-MM-dd'T'HH:mm:ss.SSS", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS)
             , of("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", yyyy, strike, MM, strike, dd, T, HH, colon, mm, colon, ss, str("."), SSS, SSS)

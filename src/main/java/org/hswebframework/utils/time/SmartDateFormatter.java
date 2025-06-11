@@ -10,50 +10,50 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-class SmartDateFormatter implements DateFormatter {
-    static Part year_cn = str("年");
-    static Part month_cn = str("月");
-    static Part day_cn = str("日");
-    static Part hour_cn = str("时");
-    static Part minute_cn = str("分");
-    static Part second_cn = str("秒");
-    static Part weeks3 = new Week("EEE", 3);
-    static Part month3 = new Month("MMM", 3);
+public class SmartDateFormatter implements DateFormatter {
+    public static final Part year_cn = str("年");
+    public static final Part month_cn = str("月");
+    public static final Part day_cn = str("日");
+    public static final Part hour_cn = str("时");
+    public static final Part minute_cn = str("分");
+    public static final Part second_cn = str("秒");
+    public static final Part weeks3 = new Week("EEE", 3);
+    public static final Part month3 = new Month("MMM", 3);
 
-    static Part zzz = new TimezonePart("zzz", 3);
+    public static final Part zzz = new TimezonePart("zzz", 3);
 
-    static Part strike = str("-");
-    static Part slash = str("/");
-    static Part plus = str("+");
+    public static final Part strike = str("-");
+    public static final Part slash = str("/");
+    public static final Part plus = str("+");
 
-    static Part blankSpace = str(" ");
+    public static final Part blankSpace = str(" ");
 
-    static Part colon = str(":");
+    public static final Part colon = str(":");
 
-    static Part yyyy = new NumberPart("yyyy", 1900, 2999);
-    static Part MM = new NumberPart("MM", 1, 12);
-    static Part M = new NumberPart("M", 1, 12);
+    public static final Part yyyy = new NumberPart("yyyy", 1900, 2999);
+    public static final Part MM = new NumberPart("MM", 1, 12);
+    public static final Part M = new NumberPart("M", 1, 12);
 
-    static Part dd = new NumberPart("dd", 1, 31);
-    static Part d = new NumberPart("d", 1, 31);
-    static Part HH = new NumberPart("HH", 0, 23);
-    static Part k = new NumberPart("k", 1, 24);
-    static Part K = new NumberPart("K", 0, 11);
+    public static final Part dd = new NumberPart("dd", 1, 31);
+    public static final Part d = new NumberPart("d", 1, 31);
+    public static final Part HH = new NumberPart("HH", 0, 23);
+    public static final Part k = new NumberPart("k", 1, 24);
+    public static final Part K = new NumberPart("K", 0, 11);
 
-    static Part a = new MatchPart("a", 2, new HashSet<>(Arrays.asList("AM", "PM")));
+    public static final Part a = new MatchPart("a", 2, new HashSet<>(Arrays.asList("AM", "PM")));
 
-    static Part h = new NumberPart("h", 1, 12);
-    static Part H = new NumberPart("H", 0, 24);
-    static Part mm = new NumberPart("mm", 0, 60);
-    static Part m = new NumberPart("m", 0, 60);
-    static Part ss = new NumberPart("ss", 0, 60);
-    static Part SSS = new NumberPart("SSS", 3, 0, 999);
+    public static final Part h = new NumberPart("h", 1, 12);
+    public static final Part H = new NumberPart("H", 0, 24);
+    public static final Part mm = new NumberPart("mm", 0, 60);
+    public static final Part m = new NumberPart("m", 0, 60);
+    public static final Part ss = new NumberPart("ss", 0, 60);
+    public static final Part SSS = new NumberPart("SSS", 3, 0, 999);
 
-    static Part s = new NumberPart("s", 0, 60);
-    static Part Z = new NumberPart("Z", 4, 0, 9999);
-    static Part XXX = new ZoneOffsetPart();
+    public static final Part s = new NumberPart("s", 0, 60);
+    public static final Part Z = new NumberPart("Z", 4, 0, 9999);
+    public static final Part XXX = new ZoneOffsetPart();
 
-    static Part T = str("T");
+    public static final Part T = str("T");
 
 
     DateTimeFormatter pattern;
@@ -341,7 +341,7 @@ class SmartDateFormatter implements DateFormatter {
     }
 
 
-    interface Part {
+    public interface Part {
         int length();
 
         String pattern();
